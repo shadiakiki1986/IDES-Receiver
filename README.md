@@ -1,9 +1,13 @@
 # IDES Receiver
 The _IDES Receiver_ is a Single-Page Application that can [decrypt and decompress](https://www.irs.gov/Businesses/Corporations/FATCA-IDES-Technical-FAQs#EncryptionE1) zip files received from the IRS via the [IDES](https://www.irs.gov/Businesses/Corporations/International-Data-Exchange-Service) gateway.
+
+It is published at http://shadiakiki1986.github.io/IDES-Receiver/
+
 It does so serverlessly, purely on your local machine in your own browser, in 3 steps:
 1. Import your PEM-formatted RSA Private key
 2. Open the received zip file
 3. and generate the XML content
+
 
 # Supported browsers
 * General: modern browser, tested on [firefox](https://www.mozilla.org/en-US/firefox/new/) 41.02
@@ -17,10 +21,10 @@ It does so serverlessly, purely on your local machine in your own browser, in 3 
 * [JQuery](http://jquery.com/)
 
 # License
-Check the [[LICENSE]] file for the full text
+Check the [LICENSE](../blob/master/LICENSE) file for the full text
 
 # Dev note 1: Installation
-The SPA is published at http://shadiakiki1986.github.io/ides-receiver/
+The SPA is published at http://shadiakiki1986.github.io/IDES-Receiver/
 
 If it is desired to install the IDES Receiver on your local server:
 

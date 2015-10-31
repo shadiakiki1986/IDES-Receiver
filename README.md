@@ -1,7 +1,6 @@
 # IDES Receiver
-The _IDES Receiver_ is a Single-Page Application that can decrypt and decompress zip files received from the IRS via the [IDES](https://www.irs.gov/Businesses/Corporations/International-Data-Exchange-Service) gateway.
-It does so serverlessly, purely on your local machine in your own browser.
-Just
+The _IDES Receiver_ is a Single-Page Application that can [decrypt and decompress](https://www.irs.gov/Businesses/Corporations/FATCA-IDES-Technical-FAQs#EncryptionE1) zip files received from the IRS via the [IDES](https://www.irs.gov/Businesses/Corporations/International-Data-Exchange-Service) gateway.
+It does so serverlessly, purely on your local machine in your own browser, in 3 steps:
 1. Import your PEM-formatted RSA Private key
 2. Open the received zip file
 3. and generate the XML content
@@ -17,17 +16,19 @@ Just
 * [Angular](https://angularjs.org/)
 * [JQuery](http://jquery.com/)
 
-# Installation
+# License
+Check the [[LICENSE]] file for the full text
+
+# Dev note 1: Installation
+The SPA is published at http://shadiakiki1986.github.io/ides-receiver/
+
 If it is desired to install the IDES Receiver on your local server:
 
     make install
     wget http://github.com/Stuk/jszip/zipball/master && unzip master && rm master
     cp Stuk-jszip-82ceacc/dist/jszip.min.js www/js/vendor/jszip.js
 
-# License
-Check the [[LICENSE]] file for the full text
-
-# My dev notes: Publishing to gh-pages
+# Dev note 2: Publishing from _master_ branch to _gh-pages_ branch
 
 First checkout of remote branch locally
 

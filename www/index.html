@@ -43,13 +43,13 @@
               <input id="privateKey" type="file" style="display:none;" name="privateKey" />
               Import your PEM-formatted RSA private key
             </label>
-             &nbsp;
-             <a href="https://www.irs.gov/Businesses/Corporations/FATCA-IDES-Technical-FAQs#EncryptionE1" target="_blank"><small>More information</small></a>
             <span ng-show="!!privateKey">
               <button ng-click="privkeyshown=!privkeyshown" type="button" class="btn btn-default">Show RSA Private key</button>
               <button ng-click="clearPrivateKey()" ng-show="!!privateKey" class="btn btn-danger">Clear key from browser</button>
               <div ng-show=" privkeyshown">{{privateKeyText}}</div>
             </span>
+             &nbsp;
+             <a href="https://www.irs.gov/Businesses/Corporations/FATCA-IDES-Technical-FAQs#EncryptionE1" target="_blank"><small>More information</small></a>
 	  </li>
           <li>
             Import the zip file received from the IDES gateway

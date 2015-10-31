@@ -32,7 +32,12 @@
         <p class="lead">In 3 steps, all on your own machine in your own browser</p>
   </div>
 
-        <ol>
+        <div id="unsupported" style="display:none">
+          Your browser is unsupported.
+          Please check <a href="https://github.com/shadiakiki1986/IDES-Receiver#supported-browsers">here</a> for supported browsers, or download a modern browser from <a href="https://www.mozilla.org/en-US/firefox/new/">here</a>.
+        </div>
+
+        <ol id="realbody">
           <li>
             <label class="btn btn-primary" for="privateKey" ng-show="!privateKey">
               <input id="privateKey" type="file" style="display:none;" name="privateKey" />

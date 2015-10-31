@@ -6,12 +6,16 @@ Just
 2. Open the received zip file
 3. and generate the XML content
 
+# Supported browsers
+* General: modern browser, tested on [firefox](https://www.mozilla.org/en-US/firefox/new/) 41.02
+* Generating the XML file: https://github.com/eligrey/FileSaver.js/#supported-browsers
+
 # Under the hood
-* Angular
-* JQuery
-* Bootstrap
-* FileSaver.js
-* forge.js
+* [forge.js](https://github.com/digitalbazaar/forge)
+* [FileSaver.js](https://github.com/eligrey/FileSaver.js/)
+* [Bootstrap](http://getbootstrap.com/)
+* [Angular](https://angularjs.org/)
+* [JQuery](http://jquery.com/)
 
 # Installation
 If it is desired to install the IDES Receiver on your local server:
@@ -19,6 +23,9 @@ If it is desired to install the IDES Receiver on your local server:
     make install
     wget http://github.com/Stuk/jszip/zipball/master && unzip master && rm master
     cp Stuk-jszip-82ceacc/dist/jszip.min.js www/js/vendor/jszip.js
+
+# License
+Check the [[LICENSE]] file for the full text
 
 # My dev notes: Publishing to gh-pages
 
@@ -36,5 +43,4 @@ Finally, return to master branch
 
     git checkout master
 
-# License
-Licensed under Creative Commons 1.0. Check the [[LICENSE]] file for the full text.
+

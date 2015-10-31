@@ -1,0 +1,92 @@
+<!DOCTYPE HTML> 
+<html lang="en" ng-app="myApp"> 
+<head>
+  <title>IDES data preparation JS</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <meta http-equiv="Content-Language" content="en-us"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/vendor/angular.js"></script>
+  <script src="js/vendor/bootstrap.js"></script>
+  <script src="js/vendor/FileSaver.js"></script>
+  <script src="js/vendor/jszip.js"></script>
+  <script src="js/vendor/forge.js"></script>
+
+  <script src="js/Main.js"></script>
+  <script src="js/index.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/vendor/jumbotron-narrow.css">
+</head> 
+ 
+<body class="container" id="Main" ng-controller="Main">
+ 
+  <div class="jumbotron">
+        <h1>
+          IDES Receiver
+          &nbsp;
+          <a href="https://github.com/shadiakiki1986/IDES-Receiver"><img src="images/github.png"></a>
+        </h1>
+        <p class="lead">In 3 steps, all on your own machine in your own browser</p>
+  </div>
+
+        <ol>
+          <li>
+            <label class="btn btn-primary" for="privateKey" ng-show="!privateKey">
+              <input id="privateKey" type="file" style="display:none;" name="privateKey" />
+              Import your PEM-formatted RSA private key
+            </label>
+            <span ng-show="!!privateKey">
+              <button ng-click="privkeyshown=!privkeyshown" type="button" class="btn btn-default">Show RSA Private key</button>
+              <button ng-click="clearPrivateKey()" ng-show="!!privateKey" class="btn btn-danger">Clear key from browser</button>
+              <div ng-show=" privkeyshown">{{privateKeyText}}</div>
+            </span>
+	  </li>
+          <li>
+            Import the zip file received from the IDES gateway
+            <input id="file" type="file" name="file"  ng-disabled="!privateKey"/>
+	  </li>
+          <li>
+            <label class="btn btn-success" ng-click="downloadXmlSigned()" ng-disabled="!dataXmlSigned">
+              Generate the decrypted and decompressed Signed XML
+            </label>
+<table ng-show="!!dataXmlSigned" class="table">
+      <tr><td>File from</td><td>{{from}} {{from=='000000.00000.TA.840'?'(IRS)':''}}</td></tr>
+      <tr><td>File to</td><td>{{to}}</td></tr>
+      </table>
+
+	  </li>
+        </ol>
+
+<!--    <ul>
+      <li>
+        <span ng-click="privkeyshown=!privkeyshown">Private key: </span>
+        <span ng-show=" privkeyshown">{{privateKey}}</span>
+        <span ng-show="!privkeyshown">{{privateKey.substr(0,10)+"..."}}</span>
+      </li>
+      <li>
+        <span ng-click="privkeyfullshown=!privkeyfullshown">Private key full: </span>
+        <span ng-show=" privkeyfullshown">{{privateKeyFull}}</span>
+        <span ng-show="!privkeyfullshown">{{privateKeyFull.substr(0,10)+"..."}}</span>
+      </li>
+      <li ng-repeat="fn in fns">
+         {{fn.name}}
+         ({{fn.text.length}} characters)
+	 <br>
+	 {{fn.text}}
+      </li>
+      <li>File from: {{from}}</li>
+      <li>File to: {{to}}</li>
+      <li>Encrypted key: {{aesEncrypted}}</li>
+      <li>Decrypted key: {{aeskey}}</li>
+      <li>Data encrypted: {{dataEncrypted}}</li>
+      <li>Data compresed: {{dataCompressed}}</li>
+    </ul>-->
+ 
+  </div><!-- end Main -->
+
+</body> 
+</html> 
+

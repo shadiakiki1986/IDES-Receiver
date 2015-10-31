@@ -1,0 +1,10 @@
+{
+    "name":  "ides-data-preparation-js",
+    "version": "0.0.1",
+    "dependencies": {
+        "angular": "*",
+        "jquery": "*",
+        "bootstrap": "*",
+        "file-saver": "*"
+    }
+}

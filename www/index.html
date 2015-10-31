@@ -29,7 +29,7 @@
           &nbsp;
           <a href="https://github.com/shadiakiki1986/IDES-Receiver"><img src="images/github.png"></a>
         </h1>
-        <p class="lead">In 3 steps, all on your own machine in your own browser</p>
+        <p class="lead">Decrypt zip files from the <a href="https://www.irs.gov/Businesses/Corporations/International-Data-Exchange-Service" target="_blank">IDES</a> gateway in your browser</p>
   </div>
 
         <div id="unsupported" style="display:none">
@@ -43,6 +43,8 @@
               <input id="privateKey" type="file" style="display:none;" name="privateKey" />
               Import your PEM-formatted RSA private key
             </label>
+             &nbsp;
+             <a href="https://www.irs.gov/Businesses/Corporations/FATCA-IDES-Technical-FAQs#EncryptionE1" target="_blank"><small>More information</small></a>
             <span ng-show="!!privateKey">
               <button ng-click="privkeyshown=!privkeyshown" type="button" class="btn btn-default">Show RSA Private key</button>
               <button ng-click="clearPrivateKey()" ng-show="!!privateKey" class="btn btn-danger">Clear key from browser</button>

@@ -1,5 +1,5 @@
 # IDES Receiver
-The _IDES Receiver_ is a Single-Page Application that can decrypt and decompress zip files received from the IRS via the IDES gateway.
+The _IDES Receiver_ is a Single-Page Application that can decrypt and decompress zip files received from the IRS via the [IDES](https://www.irs.gov/Businesses/Corporations/International-Data-Exchange-Service) gateway.
 It does so serverlessly, purely on your local machine in your own browser.
 Just
 1. Import your PEM-formatted RSA Private key

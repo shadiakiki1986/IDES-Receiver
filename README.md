@@ -21,7 +21,7 @@ It does so serverlessly, purely on your local machine in your own browser, in 3 
 * [JQuery](http://jquery.com/)
 
 # License
-Check the [LICENSE](../blob/master/LICENSE) file for the full text
+Check the [LICENSE](LICENSE) file for the full text
 
 # Dev note 1: Installation
 The SPA is published at http://shadiakiki1986.github.io/IDES-Receiver/

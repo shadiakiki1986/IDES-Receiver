@@ -18,39 +18,52 @@ function Main($scope) {
     return $scope.filterByRE(re2).then(function(zipEntry) {
       $scope.fns.push({name:zipEntry.name,text:zipEntry});//.asText()
       $scope.to = re2.exec(zipEntry.name)[1];
-      return zipEntry.async("binarystring")
+      return zipEntry.async("uint8array")
         .then(function(data64) {
           $scope.aesEncrypted = data64;
           if(!!$scope.privateKey) {
             console.log("decrypting aes key",$scope.aesEncrypted.length,$scope.aesEncrypted);
             // https://github.com/digitalbazaar/forge#pkcs8
-            aesPlusIv = $scope.privateKey.decrypt($scope.aesEncrypted);
-            console.log("aes+iv",aesPlusIv);
-            $scope.aeskey = aesPlusIv.substr(0,31+1);
-            //      $scope.aeskey = btoa($scope.aeskey);
+            aesPlusIv = $scope.privateKey.decrypt($scope.aesEncrypted,'RAW');
+            console.log("aes+iv",aesPlusIv.length,aesPlusIv);
+            if(aesPlusIv.length==32*8) {
+              $scope.cipher='AES-ECB';
+              $scope.aeskey = aesPlusIv;
+              //$scope.aeskey = btoa($scope.aeskey);
+            } else if(aesPlusIv.length==48*8) {
+              $scope.cipher='AES-CBC';
+              $scope.aeskey = aesPlusIv.substr(0,(31+1)*8);
+              $scope.iv = aesPlusIv.substr(32*8);
+            } else {
+              console.error('invalid aes length or aes+iv length');
+            }
           }
         });
     });
   };
 
   $scope.getMetadata = function() {
-    $scope.filterByRE(/(.*)_Metadata/i).then(function(zipEntry) {
-      $scope.fns.push({name:zipEntry.name,text:zipEntry}); // .asText()
+    return $scope.filterByRE(/(.*)_Metadata/i).then(function(zipEntry) {
+      return $scope.fns.push({name:zipEntry.name,text:zipEntry}); // .asText()
     });
   };
+
+  $scope.debug=true;
 
   $scope.getPayload = function() {
     re1 = /(.*)_Payload/i;
     $scope.filterByRE(re1).then(function(zipEntry) {
-      zipEntry.async("binarystring")
+      return zipEntry.async("uint8array")
         .then(function(data64) {
           $scope.fns.push({name:zipEntry.name,text:data64}); // .asText()
           $scope.from = re1.exec(zipEntry.name)[1];
           $scope.dataEncrypted = data64;//ArrayBuffer();
 
-          console.log("decrypting payload");
-          var cipher = forge.cipher.createDecipher('AES-ECB', $scope.aeskey);
-          cipher.start();
+          console.log("decrypting payload",typeof $scope.aeskey,$scope.aeskey.length);
+          var cipher = forge.cipher.createDecipher($scope.cipher, $scope.aeskey);
+          options = {};
+          if($scope.cipher=='AES-CBC') options = {iv:$scope.iv};
+          cipher.start(options);
           cipher.update(forge.util.createBuffer($scope.dataEncrypted));
           cipher.finish();
           $scope.dataCompressed = cipher.output.data;
@@ -58,10 +71,10 @@ function Main($scope) {
           // https://stuk.github.io/jszip/documentation/examples/read-local-file-api.html
           console.log("uncompressing payload");
           var zip = new JSZip();
-          zip.loadAsync($scope.dataCompressed)
+          return zip.loadAsync($scope.dataCompressed)
              .then(function(zip) {
                 $.each(zip.files, function (index, zipEntry) {
-                  zipEntry.async("binarystring")
+                  zipEntry.async("uint8array")
                     .then(function(data64) {
                       $scope.dataXmlSigned = data64;
                     });
@@ -96,8 +109,10 @@ function Main($scope) {
   $scope.readzip = function(zzz) {
     $scope.zzz = zzz;
     $scope.getAesKey().then(function() {
-      $scope.getMetadata();
-      $scope.getPayload();
+      $scope.getMetadata().then(function() {
+        $scope.$apply();
+        $scope.getPayload();
+      });
     });
   };
 

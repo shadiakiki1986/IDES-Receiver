@@ -68,7 +68,7 @@
 	  </li>
         </ol>
 
-<!--    <ul>
+    <ul ng-show="debug">
       <li>
         <span ng-click="privkeyshown=!privkeyshown">Private key: </span>
         <span ng-show=" privkeyshown">{{privateKey}}</span>
@@ -87,11 +87,13 @@
       </li>
       <li>File from: {{from}}</li>
       <li>File to: {{to}}</li>
-      <li>Encrypted key: {{aesEncrypted}}</li>
-      <li>Decrypted key: {{aeskey}}</li>
+      <li>Cipher: {{cipher}}</li>
+      <li>Encrypted key ({{aesEncrypted.length}}): {{aesEncrypted}}</li>
+      <li>Decrypted key ({{aeskey.length}}): {{aeskey}}</li>
+      <li>IV: {{iv}}</li>
       <li>Data encrypted: {{dataEncrypted}}</li>
       <li>Data compresed: {{dataCompressed}}</li>
-    </ul>-->
+    </ul>
  
   </div><!-- end Main -->
 

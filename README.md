@@ -29,8 +29,6 @@ The SPA is published at http://shadiakiki1986.github.io/IDES-Receiver/
 If it is desired to install the IDES Receiver on your local server:
 
     make install
-    wget http://github.com/Stuk/jszip/zipball/master && unzip master && rm master
-    cp Stuk-jszip-82ceacc/dist/jszip.min.js www/js/vendor/jszip.js
 
 # Dev note 2: Publishing from _master_ branch to _gh-pages_ branch
 

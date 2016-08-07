@@ -5,6 +5,7 @@
         "angular": "*",
         "jquery": "*",
         "bootstrap": "*",
-        "file-saver": "*"
+        "file-saver": "*",
+        "Stuk/jszip": "*"
     }
 }

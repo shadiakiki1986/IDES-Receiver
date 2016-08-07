@@ -5,6 +5,7 @@ install:
 	cp bower_components/bootstrap/dist/js/bootstrap.min.js www/js/vendor/bootstrap.js
 	cp bower_components/bootstrap/dist/css/bootstrap.min.css www/css/vendor/bootstrap.css
 	cp bower_components/file-saver/FileSaver.min.js www/js/vendor/FileSaver.js
+	cp bower_components/jszip/dist/jszip.js www/js/vendor/jszip.js
 	sudo npm install node-forge && cd node_modules/node-forge && sudo npm install && npm run minify
 	cp node_modules/node-forge/js/forge.min.js www/js/vendor/forge.js
 	wget http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css -O www/css/vendor/jumbotron-narrow.css

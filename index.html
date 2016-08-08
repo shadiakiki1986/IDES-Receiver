@@ -50,11 +50,16 @@
             </span>
              &nbsp;
              <a href="https://www.irs.gov/Businesses/Corporations/FATCA-IDES-Technical-FAQs#EncryptionE1" target="_blank"><small>More information</small></a>
+             &nbsp;
+             <a href="https://raw.githubusercontent.com/robrichards/xmlseclibs/master/tests/privkey.pem" target="_blank"><small>Sample private key</small></a>
+             &nbsp;
             <div ng-show=" privkeyshown">{{privateKeyText}}</div>
 	  </li>
           <li>
             Import the zip file received from the IDES gateway
             <input id="file" type="file" name="file"  ng-disabled="!privateKey"/>
+             &nbsp;
+             <a href="https://github.com/shadiakiki1986/fatca-ides-php/blob/master/tests/FatcaIdesPhp/data/testMocked_self.zip?raw=true" target="_blank"><small>Sample zip file</small></a>
 	  </li>
           <li>
             <label class="btn btn-success" ng-click="downloadXmlSigned()" ng-disabled="!dataXmlSigned">
@@ -68,7 +73,7 @@
 	  </li>
         </ol>
 
-<!--    <ul>
+    <ul ng-show="debug">
       <li>
         <span ng-click="privkeyshown=!privkeyshown">Private key: </span>
         <span ng-show=" privkeyshown">{{privateKey}}</span>
@@ -87,11 +92,13 @@
       </li>
       <li>File from: {{from}}</li>
       <li>File to: {{to}}</li>
-      <li>Encrypted key: {{aesEncrypted}}</li>
-      <li>Decrypted key: {{aeskey}}</li>
+      <li>Cipher: {{cipher}}</li>
+      <li>Encrypted key ({{aesEncrypted.length}}): {{aesEncrypted}}</li>
+      <li>Decrypted key ({{aeskey.length}}): {{aeskey}}</li>
+      <li>IV: {{iv}}</li>
       <li>Data encrypted: {{dataEncrypted}}</li>
       <li>Data compresed: {{dataCompressed}}</li>
-    </ul>-->
+    </ul>
  
   </div><!-- end Main -->
 

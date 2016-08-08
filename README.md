@@ -15,6 +15,7 @@ It does so serverlessly, purely on your local machine in your own browser, in 3 
 
 # Under the hood
 * [forge.js](https://github.com/digitalbazaar/forge)
+* [JSZip](https://stuk.github.io/jszip/)
 * [FileSaver.js](https://github.com/eligrey/FileSaver.js/)
 * [Bootstrap](http://getbootstrap.com/)
 * [Angular](https://angularjs.org/)

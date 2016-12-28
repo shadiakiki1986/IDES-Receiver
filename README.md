@@ -50,3 +50,5 @@ Finally, return to master branch
 
 # TODO
 * update cipher from cbc to ecb (or other way around?)
+ * undefined cipher: is this cbc vs ecb? (check console log 'decrypting payload') when deciphering the sample I provide on the page vs the example zip file i have in the shadi-configs
+* if rsa private key does not correspond to the zip file, a console error shows "encryption block is invalid"

@@ -8,6 +8,7 @@ It does so serverlessly, purely on your local machine in your own browser, in 3 
 2. Open the received zip file
 3. and generate the XML content
 
+[![Join the chat at https://gitter.im/IDES-Receiver](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/IDES-Receiver?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Supported browsers
 * General: modern browser, tested on [firefox](https://www.mozilla.org/en-US/firefox/new/) 41.02

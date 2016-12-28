@@ -12,6 +12,7 @@ function Main($scope) {
 
   $scope.privkeyshown = false;
   $scope.privkeyfullshown = false;
+  $scope.error = false;
 
   $scope.getAesKey = function() {
     re2 = /(.*)_Key/i;
@@ -21,8 +22,8 @@ function Main($scope) {
       // https://stuk.github.io/jszip/documentation/api_zipobject/async.html
       return zipEntry.async("binarystring")
         .then(function(data64) {
-          $scope.$apply(function() {
-            $scope.getAesKeyCore(data64);
+          return $scope.$apply(function() {
+            return $scope.getAesKeyCore(data64);
           });
         });
     });
@@ -30,8 +31,7 @@ function Main($scope) {
 
   $scope.getAesKeyCore = function(data64) {
           if(!$scope.privateKey) {
-            console.error('no private key... not decrypting');
-            return;
+            return('no private key... not decrypting');
           }
 
           $scope.aesEncrypted = data64;
@@ -42,8 +42,14 @@ function Main($scope) {
               btoa($scope.aesEncrypted)
             );
           }
-          // https://github.com/digitalbazaar/forge#pkcs8
-          aesPlusIv = $scope.privateKey.decrypt($scope.aesEncrypted);//,'RAW');
+
+          try {
+            // https://github.com/digitalbazaar/forge#pkcs8
+            aesPlusIv = $scope.privateKey.decrypt($scope.aesEncrypted);//,'RAW');
+          } catch(e) {
+            return e;
+          }
+
           if($scope.debug) {
             console.log(
               'decrypted aes',
@@ -61,9 +67,10 @@ function Main($scope) {
             $scope.aeskey = aesPlusIv.substr(0,31+1);
             $scope.iv = aesPlusIv.substr(32);
           } else {
-            console.error('invalid aes length or aes+iv length');
+            throw('invalid aes length or aes+iv length');
           }
 
+          return false;
   };
 
   $scope.getMetadata = function() {
@@ -142,7 +149,19 @@ function Main($scope) {
 
   $scope.readzip = function(zzz) {
     $scope.zzz = zzz;
-    $scope.getAesKey().then(function() {
+    $scope.error = false;
+    $scope.dataXmlSigned = false;
+    $scope.getAesKey().then(function(error) {
+        if(error) {
+          if(error=='Error: Encryption block is invalid.') {
+            error+=' Perhaps the RSA private key does not correspond to the imported ZIP file?';
+          }
+          msg = 'AES key decryption: '+error;
+          $scope.$apply(function() {
+            $scope.error = msg;
+          });
+          throw msg;
+        }
         $scope.getMetadata().then(function() {
             $scope.getPayload();
         });

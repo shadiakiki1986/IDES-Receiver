@@ -60,7 +60,8 @@
             <input id="file" type="file" name="file"  ng-disabled="!privateKey"/>
              &nbsp;
              <a href="https://github.com/shadiakiki1986/fatca-ides-php/blob/master/tests/FatcaIdesPhp/data/testMocked_self.zip?raw=true" target="_blank"><small>Sample zip file</small></a>
-	  </li>
+             <div class="alert alert-danger" ng-show="error">{{error}}</div>
+          </li>
           <li>
             <label class="btn btn-success" ng-click="downloadXmlSigned()" ng-disabled="!dataXmlSigned">
               Generate the decrypted and decompressed Signed XML

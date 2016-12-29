@@ -22,7 +22,7 @@
   <link rel="stylesheet" type="text/css" href="css/vendor/jumbotron-narrow.css">
 </head> 
  
-<body class="container" id="Main" ng-controller="Main">
+<body class="container" ng-controller="Main">
  
   <div class="jumbotron">
         <h1>
@@ -44,6 +44,7 @@
               <input id="privateKey" type="file" style="display:none;" name="privateKey" />
               Import your PEM-formatted RSA private key
             </label>
+            <div class="alert alert-danger" ng-show="errorPem">{{errorPem}}</div>
             <span ng-show="!!privateKey">
               <button ng-click="privkeyshown=!privkeyshown" type="button" class="btn btn-default">Show RSA Private key</button>
               <button ng-click="clearPrivateKey()" ng-show="!!privateKey" class="btn btn-danger">Clear key from browser</button>
@@ -60,7 +61,7 @@
             <input id="file" type="file" name="file"  ng-disabled="!privateKey"/>
              &nbsp;
              <a href="https://github.com/shadiakiki1986/fatca-ides-php/blob/master/tests/FatcaIdesPhp/data/testMocked_self.zip?raw=true" target="_blank"><small>Sample zip file</small></a>
-             <div class="alert alert-danger" ng-show="error">{{error}}</div>
+             <div class="alert alert-danger" ng-show="errorZip">{{errorZip}}</div>
           </li>
           <li>
             <label class="btn btn-success" ng-click="downloadXmlSigned()" ng-disabled="!dataXmlSigned">

@@ -1,4 +1,5 @@
-function Main($scope) {
+angular.module('myApp', [])
+.controller('Main', function($scope) {
 
   $scope.privateKey = null; // forge.js private key object
   $scope.privateKeyText = "";
@@ -12,7 +13,8 @@ function Main($scope) {
 
   $scope.privkeyshown = false;
   $scope.privkeyfullshown = false;
-  $scope.error = false;
+  $scope.errorZip = false;
+  $scope.errorPem = false;
 
   $scope.getAesKey = function() {
     re2 = /(.*)_Key/i;
@@ -147,10 +149,19 @@ function Main($scope) {
         });
   };
 
+  $scope.reset = function(full) {
+    if(full) {
+      $scope.privateKey = null;
+      $scope.privateKeyText = "";
+      $scope.errorPem = false;
+    }
+    $scope.errorZip = false;
+    $scope.dataXmlSigned = false;
+  }
+
   $scope.readzip = function(zzz) {
     $scope.zzz = zzz;
-    $scope.error = false;
-    $scope.dataXmlSigned = false;
+    $scope.reset(false);
     $scope.getAesKey().then(function(error) {
         if(error) {
           if(error=='Error: Encryption block is invalid.') {
@@ -158,10 +169,11 @@ function Main($scope) {
           }
           msg = 'AES key decryption: '+error;
           $scope.$apply(function() {
-            $scope.error = msg;
+            $scope.errorZip = msg;
           });
           throw msg;
         }
+        console.log('AES key decryption success');
         $scope.getMetadata().then(function() {
             $scope.getPayload();
         });
@@ -169,15 +181,16 @@ function Main($scope) {
   };
 
   $scope.setPrivateKey = function(pk) {
+    $scope.reset(true);
     // https://github.com/digitalbazaar/forge#pkcs8
     try {
       $scope.privateKey = forge.pki.privateKeyFromPem(pk);
       $scope.privateKeyText = pk;
-      return true;
     } catch(err) {
-      alert(err.message);
-      return false;
+      $scope.errorPem = err;
+      throw err;
     }
+    console.log('set private key success');
   };
 
   angular.element(document).ready(function () {
@@ -210,36 +223,34 @@ function Main($scope) {
       }
     }); 
 
+    $("#privateKey").on("change", function(evt) {
+      var files = evt.target.files;
+      for (var i = 0, f; f = files[i]; i++) {
+        var reader = new FileReader();
+        reader.onload = (function(theFile) {
+          return function(e) {
+            $scope.$apply(function() {
+              // throws exception if error in private key
+              $scope.setPrivateKey(e.target.result);
+              // save to local storage
+              localStorage.setItem("privateKey",e.target.result);
+              localStorage.setItem("privateKeyText",e.target.result);
+            });
+          }
+        })(f);
+        reader.readAsText(f);
+      }
+    });
+
     var pk = localStorage.getItem("privateKey");
-    if(!pk) {
-      $("#privateKey").on("change", function(evt) {
-        var files = evt.target.files;
-        for (var i = 0, f; f = files[i]; i++) {
-          var reader = new FileReader();
-          reader.onload = (function(theFile) {
-            return function(e) {
-              $scope.$apply(function() {
-		if($scope.setPrivateKey(e.target.result)) {
-                  localStorage.setItem("privateKey",e.target.result);
-                  localStorage.setItem("privateKeyText",e.target.result);
-		}
-              });
-            }
-          })(f);
-          reader.readAsText(f);
-        }
-      });
-    } else {
-      $scope.$apply(function() {
-        $scope.setPrivateKey(pk);
-      });
+    if(pk) {
+      $scope.setPrivateKey(pk);
+      $scope.$apply(); // this was not supposed to be needed, but after extensive experimentation, I couldnt do without it, so: whatever
     }
-  
   });
 
   $scope.clearPrivateKey = function() {
-    $scope.privateKey = null;
-    $scope.privateKeyText = "";
+    $scope.reset(true);
     localStorage.clear();
   };
-}
+});

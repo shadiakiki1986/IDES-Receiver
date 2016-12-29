@@ -4,6 +4,7 @@ The _IDES Receiver_ is a Single-Page Application that can [decrypt and decompres
 It is published at http://shadiakiki1986.github.io/IDES-Receiver/
 
 It does so serverlessly, purely on your local machine in your own browser, in 3 steps:
+
 1. Import your PEM-formatted RSA Private key
 2. Open the received zip file
 3. and generate the XML content
@@ -29,6 +30,12 @@ Check the [LICENSE](LICENSE) file for the full text
 The following is the software I developed to generate the compressed and signed zip files submitted *to* IDES
 * [fatca-ides-php](https://github.com/shadiakiki1986/fatca-ides-php): Php library that converts bank client data to file format submittable for FATCA at IDES gateway
 * [IDES-Data-Preparation-Php](https://github.com/shadiakiki1986/IDES-Data-Preparation-Php): Php implementation of submitting data to www.idesgateway.com. Uses `fatca-ides-php`
+
+# Usage
+* Could use the published version at http://shadiakiki1986.github.io/IDES-Receiver/
+* or just clone the repository locally
+ * and run `python -m SimpleHTTPServer` from the `www` folder
+ * or just `firefox www/index.html`
 
 # Dev note 1: Installation
 The SPA is published at http://shadiakiki1986.github.io/IDES-Receiver/

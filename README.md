@@ -25,6 +25,11 @@ It does so serverlessly, purely on your local machine in your own browser, in 3 
 # License
 Check the [LICENSE](LICENSE) file for the full text
 
+# Related software
+The following is the software I developed to generate the compressed and signed zip files submitted *to* IDES
+* [fatca-ides-php](https://github.com/shadiakiki1986/fatca-ides-php): Php library that converts bank client data to file format submittable for FATCA at IDES gateway
+* [IDES-Data-Preparation-Php](https://github.com/shadiakiki1986/IDES-Data-Preparation-Php): Php implementation of submitting data to www.idesgateway.com. Uses `fatca-ides-php`
+
 # Dev note 1: Installation
 The SPA is published at http://shadiakiki1986.github.io/IDES-Receiver/
 
